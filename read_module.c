@@ -23,8 +23,9 @@ ssize_t readline(char **lineptr, size_t *n, int stream)
 		return (-1);
 	if (*lineptr == NULL || *n == 0)
 	{
-		*n = 256;
-		*lineptr = (char *)malloc(*n);
+		*n = 256, *lineptr = (char *)malloc(*n);
+		if (*lineptr == NULL)
+			return (-1);
 		for (i = 0; i < *n; i++)
 			(*lineptr)[i] = '\0';
 	}
@@ -40,8 +41,7 @@ ssize_t readline(char **lineptr, size_t *n, int stream)
 		c = buffer[buffer_index++];
 		if (size + 1 >= *n)
 		{
-			old_size = *n;
-			*n *= 2;
+			old_size = *n, *n *= 2;
 			*lineptr = (char *)_realloc(*lineptr, old_size, *n);
 			for (i = old_size; i < *n; i++)
 				(*lineptr)[i] = '\0';

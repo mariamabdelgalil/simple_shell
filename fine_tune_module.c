@@ -158,12 +158,19 @@ void replace_vars(shell_info *info)
 int adjustPath(shell_info *info)
 {
 	int len = _strlen(info->currentCmd->args[0]);
-	char *tmpCommandStr = malloc(len + 1);
-	char *path = _strdup(getenv("PATH"));
-	char *token = tokenize(path, ":");
-	char *newPath;
+	char *tmpCommandStr, *path, *token, *newPath;
 	int newPathLen;
 
+	tmpCommandStr = malloc(len + 1);
+	if (tmpCommandStr == NULL)
+		return (0);
+	path = _strdup(getInStringVector(&info->env, "PATH"));
+	if (path == NULL)
+	{
+		free(tmpCommandStr);
+		return (0);
+	}
+	token = tokenize(path, ":");
 	_strcpy(tmpCommandStr, info->currentCmd->args[0]);
 	while (token != NULL)
 	{

@@ -86,7 +86,15 @@ void initCurrentCmd(shell_info *info)
 	int i = 0;
 
 	info->currentCmd = malloc(sizeof(Cmd));
+	if (info->currentCmd == NULL)
+		return;
 	info->currentCmd->args = malloc((MAX_ARGS + 1) * sizeof(char *));
+	if (info->currentCmd->args == NULL)
+	{
+		free(info->currentCmd);
+		info->currentCmd = NULL;
+		return;
+	}
 	for (i = 0; i <= MAX_ARGS; i++)
 		info->currentCmd->args[i] = NULL;
 	info->currentCmd->argsCount = 0;
@@ -105,6 +113,8 @@ void initCommands(shell_info *info)
 	int i = 0;
 
 	info->cmds.commands = malloc(sizeof(Cmd *) * info->cmds.countOfCommands);
+	if (info->cmds.commands == NULL)
+		return;
 	for (; i < info->cmds.countOfCommands; i++)
 		info->cmds.commands[i] = NULL;
 }

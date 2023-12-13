@@ -23,7 +23,7 @@ char **getDuplicateOfData(const StringVector *vector)
 	duplicate = (char **)malloc((count + 1) * sizeof(char *));
 	if (duplicate == NULL)
 	{
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	count = 0;
 	for (i = 0; i < vector->size; i++)
@@ -85,6 +85,8 @@ void setInStringVector(StringVector *vector, char *var, char *value)
 	char *ptr = NULL;
 	size_t i = 0;
 
+	if (tempEnv == NULL)
+		return;
 	_strcpy(tempEnv, var);
 	_strcat(tempEnv, "=");
 	_strcat(tempEnv, value);

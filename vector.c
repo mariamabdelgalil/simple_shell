@@ -10,10 +10,17 @@
  */
 void initializeVector(StringVector *vector, size_t capacity)
 {
-	vector->data = (char **)malloc(capacity * sizeof(char *));
-	vector->take_data = (int *)malloc(capacity * sizeof(int));
 	vector->size = 0;
 	vector->capacity = capacity;
+	vector->data = (char **)malloc(capacity * sizeof(char *));
+	if (vector->data == NULL)
+		return;
+	vector->take_data = (int *)malloc(capacity * sizeof(int));
+	if (vector->take_data == NULL)
+	{
+		free(vector->data);
+		return;
+	}
 }
 
 /**
