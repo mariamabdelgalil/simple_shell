@@ -11,7 +11,8 @@
  *
  * Return: void
  */
-void freeInfo(shell_info *info, int envOrnot){
+void freeInfo(shell_info *info, int envOrnot)
+{
 	int i = 0;
 
 	if (info->inputline != NULL)
@@ -27,9 +28,9 @@ void freeInfo(shell_info *info, int envOrnot){
 				info->cmds.commands[i] = NULL;
 			}
 		}
-		free_buffer((void**)&(info->cmds.commands));
+		free_buffer((void **)&(info->cmds.commands));
 	}
-	if(envOrnot)
+	if (envOrnot)
 	{
 		free_string_vector(&info->env);
 		free_string_vector(&info->aliases);
@@ -44,7 +45,7 @@ void freeInfo(shell_info *info, int envOrnot){
  *
  * Return: void
  */
-void clearInfo(shell_info* info)
+void clearInfo(shell_info *info)
 {
 	info->inputlineSize = 0;
 	info->currentCmd = NULL;

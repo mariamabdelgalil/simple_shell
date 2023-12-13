@@ -50,8 +50,6 @@ int init(shell_info *info, int ac, char **av)
  */
 void initInfo(shell_info *info)
 {
-
-	extern char **environ;
 	int envVarCount = 0;
 
 	info->currentCmd = NULL;
@@ -66,7 +64,8 @@ void initInfo(shell_info *info)
 	info->cmds.countOfCommands = 0;
 
 	initializeVector(&info->env, 100);
-	while (environ[envVarCount] != NULL) {
+	while (environ[envVarCount] != NULL)
+	{
 		push_back(&info->env, environ[envVarCount]);
 		envVarCount++;
 	}
@@ -101,11 +100,11 @@ void initCurrentCmd(shell_info *info)
  *
  * Return: void
  */
-void initCommands(shell_info* info)
+void initCommands(shell_info *info)
 {
 	int i = 0;
 
-	info->cmds.commands = malloc(sizeof(Cmd*) * info->cmds.countOfCommands);
+	info->cmds.commands = malloc(sizeof(Cmd *) * info->cmds.countOfCommands);
 	for (; i < info->cmds.countOfCommands; i++)
 		info->cmds.commands[i] = NULL;
 }

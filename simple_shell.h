@@ -12,7 +12,7 @@
 #define BUFFER_SIZE 2048
 #define FLUSH_FLAG -1
 #define MAX_ARGS 100
-
+extern char **environ;
 /**
  * struct StringVector - Structure representing a dynamic array of strings
  * @data:       Pointer to the array of strings.
