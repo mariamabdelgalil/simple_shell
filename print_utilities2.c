@@ -10,7 +10,7 @@
  *
  * Return: void
  */
-void print_no_such_file_error(char** av)
+void print_no_such_file_error(char **av)
 {
 	_putstr(av[0], STDERR_FILENO);
 	_putstr(": 0: Can't open ", STDERR_FILENO);
@@ -55,7 +55,7 @@ void print_error(shell_info *info, char *message)
  *
  * Return: void
  */
-void print_one_alias(const char * alias, const char *value, int stream)
+void print_one_alias(const char *alias, const char *value, int stream)
 {
 	_putstr(alias, stream);
 	_putchar('=', stream);
@@ -74,7 +74,7 @@ void print_one_alias(const char * alias, const char *value, int stream)
  *
  * Return: void
  */
-void print_env(const StringVector* vector)
+void print_env(const StringVector *vector)
 {
 	size_t i;
 
@@ -84,7 +84,7 @@ void print_env(const StringVector* vector)
 		{
 			_putstr(vector->data[i], STDOUT_FILENO);
 			_putchar('\n', STDOUT_FILENO);
-	        }
+		}
 	}
 	_putchar(FLUSH_FLAG, STDOUT_FILENO);
 }
@@ -97,10 +97,10 @@ void print_env(const StringVector* vector)
  *
  * Return: void
  */
-void print_alias(const StringVector* vector)
+void print_alias(const StringVector *vector)
 {
 	size_t i;
-	const char* ptr;
+	const char *ptr;
 
 	for (i = 0; i < vector->size; ++i)
 	{
@@ -111,7 +111,7 @@ void print_alias(const StringVector* vector)
 				_putchar(*ptr, STDOUT_FILENO);
 			_putchar('=', STDOUT_FILENO);
 			_putchar('\'', STDOUT_FILENO);
-			_putstr((char*)(ptr + 1),STDOUT_FILENO);
+			_putstr((char *)(ptr + 1), STDOUT_FILENO);
 			_putstr("'\n", STDOUT_FILENO);
 		}
 	}

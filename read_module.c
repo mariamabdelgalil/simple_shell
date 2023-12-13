@@ -12,21 +12,20 @@
  *
  * Return: The number of characters read, or -1 on failure.
  */
-ssize_t readline(char **lineptr, size_t *n, int stream) {
+ssize_t readline(char **lineptr, size_t *n, int stream)
+{
 	static char buffer[BUFFER_SIZE];
-	static size_t buffer_index = 0, buffer_size = 0;
-	size_t size = 0, old_size;
+	static size_t buffer_index, buffer_size;
+	size_t size = 0, old_size, i;
 	char c;
-	size_t i;
 
 	if (!lineptr || !n)
-		return -1;
-
+		return (-1);
 	if (*lineptr == NULL || *n == 0)
 	{
 		*n = 256;
 		*lineptr = (char *)malloc(*n);
-		for(i = 0; i < *n; i++)
+		for (i = 0; i < *n; i++)
 			(*lineptr)[i] = '\0';
 	}
 	while (1)
@@ -35,32 +34,26 @@ ssize_t readline(char **lineptr, size_t *n, int stream) {
 		{
 			buffer_size = read(stream, buffer, BUFFER_SIZE);
 			if (buffer_size <= 0)
-			{
 				break;
-			}
-		buffer_index = 0;
+			buffer_index = 0;
 		}
 		c = buffer[buffer_index++];
 		if (size + 1 >= *n)
 		{
 			old_size = *n;
 			*n *= 2;
-			*lineptr= (char *)_realloc(*lineptr, old_size, *n);
-			for(i = old_size; i < *n; i++)
+			*lineptr = (char *)_realloc(*lineptr, old_size, *n);
+			for (i = old_size; i < *n; i++)
 				(*lineptr)[i] = '\0';
 		}
 		(*lineptr)[size++] = c;
-
 		if (c == '\n' || c == EOF)
-		{
 			break;
-		}
 	}
 	if (size == 0 || c == EOF)
-		return -1;
-	(*lineptr)[size] = '\0';
-	*n = size;
-	return size;
+		return (-1);
+	(*lineptr)[size] = '\0', *n = size;
+	return (size);
 }
 
 /**
@@ -93,5 +86,6 @@ void handleCtrlCSlot(int signum)
 int readInput(shell_info *info)
 {
 	signal(SIGINT, handleCtrlCSlot);
-	return readline(&info->inputline, &info->inputlineSize, info->readStream_descriptor);
+	return (readline(&info->inputline, &info->inputlineSize,
+							info->readStream_descriptor));
 }

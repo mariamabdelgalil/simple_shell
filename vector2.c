@@ -9,18 +9,18 @@
  *
  * Return: Pointer to the duplicate array.
  */
-char** getDuplicateOfData(const StringVector* vector)
+char **getDuplicateOfData(const StringVector *vector)
 {
 	size_t count = 0, i = 0;
-	char** duplicate;
+	char **duplicate;
 
 	while (i < vector->size)
 	{
-		if(vector->take_data[i])
+		if (vector->take_data[i])
 			count++;
 		i++;
 	}
-	duplicate = (char**)malloc((count + 1) * sizeof(char*));
+	duplicate = (char **)malloc((count + 1) * sizeof(char *));
 	if (duplicate == NULL)
 	{
 		exit(EXIT_FAILURE);
@@ -28,7 +28,7 @@ char** getDuplicateOfData(const StringVector* vector)
 	count = 0;
 	for (i = 0; i < vector->size; i++)
 	{
-		if(vector->take_data[i] == 0)
+		if (vector->take_data[i] == 0)
 			continue;
 		duplicate[count] = _strdup(vector->data[i]);
 		if (duplicate[count] == NULL)
@@ -49,10 +49,10 @@ char** getDuplicateOfData(const StringVector* vector)
  * where @var is found after an equals sign.
  * Return: void
  */
-void unsetInStringVector(StringVector* vector, char *var)
+void unsetInStringVector(StringVector *vector, char *var)
 {
 	size_t i;
-	char* ptr;
+	char *ptr;
 
 	for (i = 0; i < vector->size; ++i)
 	{
@@ -78,11 +78,11 @@ void unsetInStringVector(StringVector* vector, char *var)
  *
  * Return: void
  */
-void setInStringVector(StringVector* vector, char *var, char *value)
+void setInStringVector(StringVector *vector, char *var, char *value)
 {
 	int len = _strlen(var) + _strlen(value) + 2;
-	char *tempEnv = (char*)malloc(len);
-	char* ptr = NULL;
+	char *tempEnv = (char *)malloc(len);
+	char *ptr = NULL;
 	size_t i = 0;
 
 	_strcpy(tempEnv, var);
@@ -114,10 +114,10 @@ void setInStringVector(StringVector* vector, char *var, char *value)
  *
  * Return: Pointer to the value of @var, or NULL if not found.
  */
-char* getInStringVector(StringVector* vector, char *var)
+char *getInStringVector(StringVector *vector, char *var)
 {
 
-	char* ptr = NULL;
+	char *ptr = NULL;
 	size_t i = 0;
 
 	for (i = 0; i < vector->size; ++i)

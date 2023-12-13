@@ -8,10 +8,10 @@
  * StringVector, and initializes the size and capacity fields.
  * Return: void
  */
-void initializeVector(StringVector* vector, size_t capacity)
+void initializeVector(StringVector *vector, size_t capacity)
 {
-	vector->data = (char**)malloc(capacity * sizeof(char*));
-	vector->take_data = (int*)malloc(capacity * sizeof(int));
+	vector->data = (char **)malloc(capacity * sizeof(char *));
+	vector->take_data = (int *)malloc(capacity * sizeof(int));
 	vector->size = 0;
 	vector->capacity = capacity;
 }
@@ -25,13 +25,15 @@ void initializeVector(StringVector* vector, size_t capacity)
  * Adds a copy of @value to the end of the vector.
  * Return: void
  */
-void push_back(StringVector* vector, const char* value)
+void push_back(StringVector *vector, const char *value)
 {
 	if (vector->size == vector->capacity)
 	{
 		vector->capacity *= 2;
-		vector->data = (char**)_realloc(vector->data, vector->size * sizeof(char*), vector->capacity * sizeof(char*));
-		vector->take_data = (int*)_realloc(vector->data, vector->size * sizeof(int), vector->capacity * sizeof(int));
+		vector->data = (char **)_realloc(vector->data, vector->size
+									* sizeof(char *), vector->capacity * sizeof(char *));
+		vector->take_data = (int *)_realloc(vector->data, vector->size
+									* sizeof(int), vector->capacity * sizeof(int));
 	}
 	vector->data[vector->size] = _strdup(value);
 	vector->take_data[vector->size] = 1;
@@ -47,7 +49,7 @@ void push_back(StringVector* vector, const char* value)
  * in the StringVector, and resets size and capacity to zero.
  * Return: void
  */
-void free_string_vector(StringVector* vector)
+void free_string_vector(StringVector *vector)
 {
 	size_t i;
 

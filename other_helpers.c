@@ -4,8 +4,10 @@
  * transferIntToBuffer - Convert an integer to a string buffer.
  * @buffer: Destination buffer to store the string representation.
  * @value: Integer value to be converted.
+ *
  * Description:
- * Converts an integer to its string representation and stores it in the buffer.
+ * Converts an integer to its string representation
+ * and stores it in the buffer.
  *
  * Return: void
  */
@@ -48,10 +50,10 @@ void transferIntToBuffer(char *buffer, int value)
  */
 int executableFile(char *filePath)
 {
-	int file = filePath && ((filePath[0] == '/') || (filePath[0] == '.' && filePath[1] == '/')
-		||(filePath[0] == '.' && filePath[1] == '.' && filePath[2] == '/') );
-
-	return (file && access(filePath, X_OK) == 0 );
+	int file = filePath && ((filePath[0] == '/')
+					|| (filePath[0] == '.' && filePath[1] == '/')
+						|| (filePath[0] == '.' && filePath[1] == '.' && filePath[2] == '/'));
+	return (file && access(filePath, X_OK) == 0);
 }
 
 /**
@@ -81,5 +83,5 @@ int isValidExit(char *s)
 			return (-100);
 		s++;
 	}
-	return res;
+	return (res);
 }

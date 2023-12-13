@@ -13,7 +13,7 @@
  */
 void _putchar(const char c, int fileDescriptor)
 {
-	static int idxInBuffer = 0;
+	static int idxInBuffer;
 	static char buffer[BUFFER_SIZE];
 
 	if (c == FLUSH_FLAG || idxInBuffer >= BUFFER_SIZE)
@@ -72,7 +72,8 @@ void display_prompt(int ac)
  *
  * Return: void
  */
-void print_dir(const char* dir, int fileDescriptor)
+void print_dir(const char *dir, int fileDescriptor)
+
 {
 	_putstr(dir, fileDescriptor);
 	_putchar('\n', fileDescriptor);
