@@ -90,7 +90,7 @@ void executeCurrentCommand(shell_info *info)
 {
 	pid_t child_pid;
 	int adjust = 0;
-	const char *pathValue = getenv("PATH");
+	const char *pathValue = getInStringVector(&info->env, "PATH");
 	char **envVars;
 
 	if (info->currentCmd == NULL || info->currentCmd->args == NULL
