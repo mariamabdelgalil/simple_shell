@@ -12,7 +12,7 @@
  *
  * Return: 0 on successful execution, or an exit status in case of an error.
  */
-int main(int ac, char** av)
+int main(int ac, char **av)
 {
 	int read = 0;
 	shell_info shellInfo;
@@ -24,7 +24,8 @@ int main(int ac, char** av)
 		clearInfo(&shellInfo);
 		display_prompt(ac);
 		/* readInput */
-		if ((read = readInput(&shellInfo))== -1)
+		read = readInput(&shellInfo);
+		if (read == -1)
 		{
 			if (shellInfo.status == 0)
 				_putchar(FLUSH_FLAG, STDOUT_FILENO);
@@ -39,7 +40,7 @@ int main(int ac, char** av)
 	}
 	freeInfo(&shellInfo, 1);
 	if (!isatty(STDIN_FILENO) && shellInfo.status)
-			exit(shellInfo.status);
+		exit(shellInfo.status);
 	if (shellInfo.isExit)
 	{
 		if (shellInfo.status)

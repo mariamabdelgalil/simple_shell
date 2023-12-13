@@ -9,7 +9,7 @@
  *
  * Return: void
  */
-void remove_comments(shell_info* info)
+void remove_comments(shell_info *info)
 {
 	size_t j = 0;
 
@@ -44,13 +44,13 @@ void adjustChain(shell_info *info)
 			info->cmds.seperators[info->cmds.countOfCommands - 1] = ';';
 			info->cmds.countOfCommands++;
 		}
-		else if (info->inputline[i] == '|' && info->inputline[i+1] == '|')
+		else if (info->inputline[i] == '|' && info->inputline[i + 1] == '|')
 		{
 			info->cmds.seperators[info->cmds.countOfCommands - 1] = '|';
 			info->cmds.countOfCommands++;
 			i++;
 		}
-		else if (info->inputline[i] == '&' && info->inputline[i+1] == '&')
+		else if (info->inputline[i] == '&' && info->inputline[i + 1] == '&')
 		{
 			info->cmds.seperators[info->cmds.countOfCommands - 1] = '&';
 			info->cmds.countOfCommands++;
@@ -71,12 +71,13 @@ void adjustChain(shell_info *info)
  *
  * Return: void
  */
-void replace_alias(shell_info* info)
+void replace_alias(shell_info *info)
 {
 
 	char *tmp, *beforeTmp;
 
-	beforeTmp = tmp = getInStringVector(&info->aliases, info->currentCmd->args[0]);
+	beforeTmp = tmp = getInStringVector(&info->aliases,
+						info->currentCmd->args[0]);
 	while (tmp != NULL)
 	{
 		beforeTmp = tmp;
@@ -100,7 +101,7 @@ void replace_alias(shell_info* info)
  *
  * Return: void
  */
-void replace_vars(shell_info* info)
+void replace_vars(shell_info *info)
 {
 	int i = 0;
 	char str[100];
@@ -108,7 +109,8 @@ void replace_vars(shell_info* info)
 
 	for (i = 0; i < info->currentCmd->argsCount; i++)
 	{
-		if (info->currentCmd->args[i][0] != '$' || info->currentCmd->args[i][1] == '\0')
+		if (info->currentCmd->args[i][0] != '$'
+				|| info->currentCmd->args[i][1] == '\0')
 			continue;
 		if (_strcmp(info->currentCmd->args[i], "$?") == 0)
 		{
@@ -142,7 +144,9 @@ void replace_vars(shell_info* info)
 
 
 /**
- * adjustPath - Adjust the command path by searching directories in the PATH variable.
+ * adjustPath - Adjust the command path by
+ * searching directories in the PATH variable.
+ *
  * @info: Pointer to shell_info struct.
  *
  * Searches directories in the PATH variable to find the executable file
@@ -163,7 +167,7 @@ int adjustPath(shell_info *info)
 	_strcpy(tmpCommandStr, info->currentCmd->args[0]);
 	while (token != NULL)
 	{
-		newPathLen = _strlen(token) + 1 + len + 1; /* +1 for '/', +1 for null terminator*/
+		newPathLen = _strlen(token) + 1 + len + 1;
 		newPath = malloc(newPathLen);
 		if (newPath != NULL)
 		{
@@ -176,7 +180,7 @@ int adjustPath(shell_info *info)
 				free(tmpCommandStr);
 				free(info->currentCmd->args[0]); /* Free the old memory */
 				info->currentCmd->args[0] = newPath;
-				return 1;
+				return (1);
 			}
 		free(newPath);
 		}
@@ -184,5 +188,5 @@ int adjustPath(shell_info *info)
 	}
 	free(path);
 	free(tmpCommandStr);
-	return 0;
+	return (0);
 }

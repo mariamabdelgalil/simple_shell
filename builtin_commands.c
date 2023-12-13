@@ -56,7 +56,7 @@ void executeUnSetEnv(shell_info *info)
 	{
 		for (i = 1; i < info->currentCmd->argsCount; i++)
 		{
-			unsetInStringVector(&info->env,info->currentCmd->args[i]);
+			unsetInStringVector(&info->env, info->currentCmd->args[i]);
 		}
 	}
 }
@@ -77,7 +77,8 @@ void executeSetEnv(shell_info *info)
 		_putchar(FLUSH_FLAG, STDERR_FILENO);
 		return;
 	}
-	setInStringVector(&info->env, info->currentCmd->args[1], info->currentCmd->args[2]);
+	setInStringVector(&info->env, info->currentCmd->args[1],
+						info->currentCmd->args[2]);
 }
 /**
  * executeCD - Change the current working directory based on command arguments.
@@ -101,7 +102,7 @@ void executeCD(shell_info *info)
 		if (GoToDir == NULL)
 		{
 			GoToDir = getInStringVector(&info->env, "PWD");
-			if(GoToDir == NULL)
+			if (GoToDir == NULL)
 				GoToDir = "/";
 		}
 		cd_out = chdir(GoToDir);
@@ -127,7 +128,8 @@ void executeCD(shell_info *info)
 	}
 	else
 	{
-		setInStringVector(&info->env, "OLDPWD", getInStringVector(&info->env, "PWD"));
+		setInStringVector(&info->env, "OLDPWD",
+						getInStringVector(&info->env, "PWD"));
 		setInStringVector(&info->env, "PWD", getcwd(currentDirBuffer, BUFFER_SIZE));
 	}
 }
@@ -136,7 +138,7 @@ void executeCD(shell_info *info)
  * executeAlias - Manage shell aliases based on command arguments.
  * @info: Pointer to shell_info struct.
  *
- * Description: Handles the creation and display of shell aliases. When provided
+ * Description: Handles the creation and display of shell aliases.When provided
  * with alias names and values, it creates new aliases. If only alias names are
  * provided, it displays the corresponding alias values.
  *
@@ -145,7 +147,7 @@ void executeCD(shell_info *info)
 void executeAlias(shell_info *info)
 {
 	int i;
-	char* tmp;
+	char *tmp;
 	char alias[BUFFER_SIZE], aliasValue[BUFFER_SIZE];
 	size_t aliasLen;
 

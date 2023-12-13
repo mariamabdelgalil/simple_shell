@@ -62,7 +62,8 @@ char *_strncpy(char *dest, const char *src, int n)
  * @dest: Destination buffer.
  * @src:  Source string.
  *
- * Description: Appends characters from @src to @dest, ensuring null-termination.
+ * Description: Appends characters from @src to @dest,
+ * ensuring null-termination.
  * Return: Pointer to the destination buffer (@dest).
  */
 char *_strcat(char *dest, char *src)

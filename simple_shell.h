@@ -18,7 +18,7 @@ extern char **environ;
  * @data:       Pointer to the array of strings.
  * @take_data:  Array indicating whether each element should be used or not.
  * @size:       Current number of elements in the vector.
- * @capacity:   Maximum number of elements the vector can hold without resizing.
+ * @capacity:  Maximum number of elements the vector can hold without resizing.
  *
  * Description:
  *     This structure represents a dynamic array (vector) designed to hold an
@@ -28,15 +28,15 @@ extern char **environ;
  */
 typedef struct StringVector
 {
-	char** data;
-	int* take_data;
+	char **data;
+	int *take_data;
 	size_t size;
 	size_t capacity;
 } StringVector;
 /**
  * struct SimpleCommand - Structure representing a simple command
  * @argsCount:       Number of arguments in the command.
- * @argsCountMax:    Maximum number of arguments needed to be deallocated afterwards.
+ * @argsCountMax:    Max number of arguments needed to be deallocated later.
  *                   (This helps in managing memory efficiently.)
  * @args:            Pointer to the array of command arguments.
  *
@@ -45,16 +45,16 @@ typedef struct StringVector
  *     such as the number of arguments, the maximum number of arguments needed
  *     for deallocation, and a pointer to the array of command arguments.
  */
-typedef struct SimpleCommand {
+typedef struct SimpleCommand
+{
 	int argsCount;
 	int argsCountMax;
-	char** args;
+	char **args;
 } Cmd;
-
 /**
  * struct ComplexCommand - Structure representing a complex command
  * @commands:          Pointer to an array of simple commands.
- * @seperators:        Array of separators between commands (limited to 100 characters).
+ * @seperators:Array of separators between commands(limited to 100 characters)
  * @countOfCommands:   Number of simple commands in the complex command.
  *
  * Description:
@@ -62,8 +62,9 @@ typedef struct SimpleCommand {
  *     simple commands, an array of separators between commands, and the
  *     total count of simple commands in the complex command.
  */
-typedef struct ComplexCommand {
-	Cmd** commands;
+typedef struct ComplexCommand
+{
+	Cmd **commands;
 	char seperators[100];/*assume 101 commands is the limit for now*/
 	int countOfCommands;
 } CmdArr;
@@ -84,10 +85,10 @@ typedef struct ComplexCommand {
  * @exitNum:              Exit number for the shell.
  *
  * Description:
- *     This structure represents runtime information about a shell, including
- *     environment variables, aliases, input line buffer, file descriptor for
- *     reading input, shell program name, current command, complex command
- *     structure, status code, number of lines processed, and exit-related flags.
+ *  This structure represents runtime information about a shell, including
+ *  environment variables, aliases, input line buffer, file descriptor for
+ *  reading input, shell program name, current command, complex command
+ *  structure, status code, number of lines processed, and exit-related flags.
  */
 typedef struct Info
 {
@@ -128,15 +129,15 @@ char *tokenize(char *str, const char *delim);
 
 /* String Vector utilities to deal with string vector*/
 /*vector.c*/
-void initializeVector(StringVector* vector, size_t capacity);
-void push_back(StringVector* vector, const char* value);
-void free_string_vector(StringVector* vector);
+void initializeVector(StringVector *vector, size_t capacity);
+void push_back(StringVector *vector, const char *value);
+void free_string_vector(StringVector *vector);
 
 /*vector2.c*/
-char** getDuplicateOfData(const StringVector* vector);
-void unsetInStringVector(StringVector* vector, char *var);
-void setInStringVector(StringVector* vector, char *var, char *value);
-char* getInStringVector(StringVector* vector, char *var);
+char **getDuplicateOfData(const StringVector *vector);
+void unsetInStringVector(StringVector *vector, char *var);
+void setInStringVector(StringVector *vector, char *var, char *value);
+char *getInStringVector(StringVector *vector, char *var);
 /**************************************************************************/
 
 /* utilities to print to different streams */
@@ -144,23 +145,23 @@ char* getInStringVector(StringVector* vector, char *var);
 void _putchar(const char c, int fileDescriptor);
 void _putstr(const char *str, int fileDescriptor);
 void display_prompt(int ac);
-void print_dir(const char* dir, int fileDescriptor);
+void print_dir(const char *dir, int fileDescriptor);
 
 
 /*print_utilities2.c*/
-void print_no_such_file_error(char** av);
+void print_no_such_file_error(char **av);
 void print_error(shell_info *info, char *message);
-void print_one_alias(const char * alias, const char *value, int stream);
-void print_env(const StringVector* vector);
-void print_alias(const StringVector* vector);
+void print_one_alias(const char *alias, const char *value, int stream);
+void print_env(const StringVector *vector);
+void print_alias(const StringVector *vector);
 /**************************************************************************/
 
 /* module to handle freeing memory for complex data*/
 /* memory_management_module.c */
 void free_buffer(void **buffer);
-void free_cmdInternals(Cmd * command);
+void free_cmdInternals(Cmd *command);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void freeDoubleCharArray(char** array);
+void freeDoubleCharArray(char **array);
 /**************************************************************************/
 
 /* module to handle initializing and clearing of shell runtime information*/
@@ -168,21 +169,21 @@ void freeDoubleCharArray(char** array);
 int init(shell_info *info, int ac, char **av);
 void initInfo(shell_info *info);
 void initCurrentCmd(shell_info *info);
-void initCommands(shell_info* info);
+void initCommands(shell_info *info);
 
 /*information_handling_module2.c*/
 void freeInfo(shell_info *info, int envOrnot);
-void clearInfo(shell_info* info);
+void clearInfo(shell_info *info);
 /**************************************************************************/
 
 /* module to help parser/executor adjust data before operating on it*/
 /*fine_tune_module.c*/
 /*in parsing*/
-void remove_comments(shell_info* info);
+void remove_comments(shell_info *info);
 void adjustChain(shell_info *info);
 /*in execution*/
-void replace_vars(shell_info* info);
-void replace_alias(shell_info* info);
+void replace_vars(shell_info *info);
+void replace_alias(shell_info  *info);
 int adjustPath(shell_info *info);
 /**************************************************************************/
 /* other helper functions */
@@ -196,14 +197,14 @@ int isValidExit(char *s);
 void executeExit(shell_info *info);
 void executeUnSetEnv(shell_info *info);
 void executeSetEnv(shell_info *info);
-void executeCD(shell_info*);
+void executeCD(shell_info *info);
 void executeAlias(shell_info *info);
 /**************************************************************************/
 
 /* EXECUTION UNIT*/
 /* execution_module.c */
-void executeCurrentCommand(shell_info * info);
-int executeBuiltIn(shell_info * info);
+void executeCurrentCommand(shell_info *info);
+int executeBuiltIn(shell_info *info);
 void execute(shell_info *info);
 /**************************************************************************/
 

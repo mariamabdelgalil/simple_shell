@@ -9,7 +9,7 @@
  *
  * Return: void
  */
-void freeDoubleCharArray(char** array)
+void freeDoubleCharArray(char **array)
 {
 	int i;
 
@@ -45,7 +45,7 @@ void free_buffer(void **buffer)
  *
  * Return: void
  */
-void free_cmdInternals(Cmd * command)
+void free_cmdInternals(Cmd *command)
 {
 	int i;
 
@@ -72,7 +72,7 @@ void free_cmdInternals(Cmd * command)
  * @new_size: Size of the new memory block.
  *
  * Description: Reallocates a memory block. If @ptr is NULL, works like malloc.
- * If @new_size is 0, works like free. If reallocation fails, the original block
+ * If @new_size is 0,works like free.If reallocation fails, the original block
  * is unchanged.
  *
  * Return: Pointer to the reallocated memory block.

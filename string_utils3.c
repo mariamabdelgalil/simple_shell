@@ -34,7 +34,8 @@ char *_strchr(char *s, char c)
  * _strdup - Duplicate a string
  * @str: String to duplicate.
  *
- * Description: Returns a pointer to a newly allocated space in memory containing
+ * Description: Returns a pointer to a newly allocated space
+ * in memory containing
  * a copy of the string @str, or NULL if memory allocation fails.
  *
  * Return: Pointer to the duplicated string, or NULL on failure.
@@ -71,7 +72,7 @@ char *_strdup(const char *str)
  */
 char *find_substring_start(const char *full_string, const char *substring)
 {
-	for (;*substring != '\0'; substring++, full_string++)
+	for (; *substring != '\0'; substring++, full_string++)
 		if (*substring != *full_string)
 			return (NULL);
 	return ((char *)full_string);
@@ -89,8 +90,9 @@ char *find_substring_start(const char *full_string, const char *substring)
  * Return:
  *     Pointer to the next token, or NULL if no more tokens are present.
  */
-char *tokenize(char *str, const char *delim) {
-	static char *lastToken = NULL;
+char *tokenize(char *str, const char *delim)
+{
+	static char *lastToken;
 	char *tokenStart, *tokenEnd;
 
 	if (str != NULL)
